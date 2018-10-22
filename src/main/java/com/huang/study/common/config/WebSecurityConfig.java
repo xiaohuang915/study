@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * @Auther: pc.huang
+ * @Auther: pc.huang 配置文件
  * @Date: 2018/10/15 15:06
  * @Description:
  */
