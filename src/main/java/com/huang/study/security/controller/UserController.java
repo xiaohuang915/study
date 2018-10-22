@@ -2,7 +2,7 @@ package com.huang.study.security.controller;
 
 import com.huang.study.common.tips.SuccessTip;
 import com.huang.study.common.tips.Tip;
-import com.huang.study.security.dto.User;
+import com.huang.study.security.dto.SysUser;
 import com.huang.study.security.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,14 +26,14 @@ public class UserController {
     }
 
     @PostMapping("/reg")
-    private Tip add(@RequestBody User user){
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userService.add(user);
+    private Tip add(@RequestBody SysUser sysUser){
+        sysUser.setPassword(bCryptPasswordEncoder.encode(sysUser.getPassword()));
+        userService.add(sysUser);
         return new SuccessTip("注册成功");
     }
     @PostMapping("/login")
-    private Tip login(@RequestBody User user){
-        User userByUserName = userService.findUserByUserName(user.getUserName());
+    private Tip login(@RequestBody SysUser sysUser){
+        SysUser userBySysUserName = userService.findUserByUserName(sysUser.getUserName());
         return new SuccessTip("登陆成功");
     }
 }

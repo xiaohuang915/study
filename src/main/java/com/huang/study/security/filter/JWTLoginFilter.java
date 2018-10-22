@@ -1,7 +1,7 @@
 package com.huang.study.security.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.huang.study.security.dto.User;
+import com.huang.study.security.dto.SysUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,13 +32,13 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        User user = null;
+        SysUser sysUser = null;
         try {
-            user = JSON.parseObject(request.getInputStream(), User.class);
+            sysUser = JSON.parseObject(request.getInputStream(), SysUser.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword(), new ArrayList<>()));
+        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(sysUser.getUserName(), sysUser.getPassword(), new ArrayList<>()));
     }
 
     @Override

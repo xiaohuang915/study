@@ -8,8 +8,8 @@ import javax.persistence.*;
  * @Description:
  */
 @Entity
-@Table(name = "tb_user")
-public class User {
+@Table(name = "sys_user")
+public class SysUser {
     @Id
     @GeneratedValue
     private long id;

@@ -1,7 +1,7 @@
 package com.huang.study.security.service.impl;
 
 import com.huang.study.security.dao.UserRepository;
-import com.huang.study.security.dto.User;
+import com.huang.study.security.dto.SysUser;
 import com.huang.study.security.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
     @Override
-    public void add(User user) {
-        userRepository.save(user);
+    public void add(SysUser sysUser) {
+        userRepository.save(sysUser);
     }
 
     @Override
@@ -28,12 +28,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void update(User user) {
-        userRepository.save(user);
+    public void update(SysUser sysUser) {
+        userRepository.save(sysUser);
     }
 
     @Override
-    public User findUserByUserName(String userName) {
+    public SysUser findUserByUserName(String userName) {
        return userRepository.findByUserName(userName);
     }
 }

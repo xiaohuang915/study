@@ -1,6 +1,6 @@
 package com.huang.study.security.service;
 
-import com.huang.study.security.dto.User;
+import com.huang.study.security.dto.SysUser;
 
 /**
  * @Auther: pc.huang
@@ -8,8 +8,8 @@ import com.huang.study.security.dto.User;
  * @Description:
  */
 public interface IUserService {
-    void add(User user);
+    void add(SysUser sysUser);
     void del(long id);
-    void update(User user);
-    User findUserByUserName(String userName);
+    void update(SysUser sysUser);
+    SysUser findUserByUserName(String userName);
 }
