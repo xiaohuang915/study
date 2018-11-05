@@ -1,7 +1,5 @@
 package com.huang.study.common.config;
 
-import com.huang.study.security.filter.JWTAuthenticationFilter;
-import com.huang.study.security.filter.JWTLoginFilter;
 import com.huang.study.security.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -30,11 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().formLogin().loginPage("/login").loginProcessingUrl("/login").and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/user/reg","/user/login").permitAll()
+                .antMatchers(HttpMethod.GET,"/mq/send","/user/login").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .addFilter(new JWTLoginFilter(authenticationManager()))
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+                .and();
+//                .addFilter(new JWTLoginFilter(authenticationManager()))
+//                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
     }
 
     @Override
