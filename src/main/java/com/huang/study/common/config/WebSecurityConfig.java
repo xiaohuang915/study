@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().formLogin().loginPage("/login").loginProcessingUrl("/login").and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/mq/send","/user/login").permitAll()
+                .antMatchers(HttpMethod.GET,"/**","/user/login").permitAll()
                 .anyRequest().authenticated()
                 .and();
 //                .addFilter(new JWTLoginFilter(authenticationManager()))
