@@ -3,7 +3,6 @@ package com.huang.study.common.config;
 import com.huang.study.security.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().formLogin().loginPage("/login").loginProcessingUrl("/login").and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/**","/user/login").permitAll()
+                .antMatchers("/**","/user/login").permitAll()
                 .anyRequest().authenticated()
                 .and();
 //                .addFilter(new JWTLoginFilter(authenticationManager()))

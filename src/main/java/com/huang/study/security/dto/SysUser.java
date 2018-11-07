@@ -1,6 +1,7 @@
 package com.huang.study.security.dto;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @Auther: pc.huang
@@ -9,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "sys_user")
-public class SysUser {
+public class SysUser implements Serializable {
     @Id
     @GeneratedValue
     private long id;
@@ -39,5 +40,14 @@ public class SysUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

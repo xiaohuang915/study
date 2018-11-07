@@ -1,6 +1,7 @@
 package com.huang.study.rabbitmq;
 
 import com.huang.study.common.config.RabbitmqConfig;
+import com.huang.study.security.dto.SysUser;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
@@ -54,7 +55,7 @@ public class RabbitmqComp {
      * @param msg
      */
     @RabbitListener(queues = "message.center.create.ttl")
-    public void receive5(String msg) {
+    public void receive5(SysUser msg) {
         System.out.println("死信队列接收消息=" + msg + "接收时间=" + new Date());
     }
 
@@ -63,7 +64,7 @@ public class RabbitmqComp {
      * @param msg
      */
     @RabbitListener(queues = "message.center.create")
-    public void receive4(String msg) {
+    public void receive4(SysUser msg) {
         System.out.println("Ttl延时接收消息=" + msg + "接收时间=" + new Date());
     }
 }

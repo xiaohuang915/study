@@ -1,11 +1,10 @@
 package com.huang.study.rabbitmq;
 
 import com.huang.study.rabbitmq.queueenum.QueueEnum;
+import com.huang.study.security.dto.SysUser;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -48,8 +47,8 @@ public class RabbitmqController {
      * 死信队列实现延时消费
      * @param msg
      */
-    @GetMapping("/ex")
-    public void send2(String msg) {
+    @PostMapping("/ex")
+    public void send2(@RequestBody SysUser msg) {
         System.out.println("Ttl延时消息发送时间=" + new Date());
         rabbitmqService.send(QueueEnum.MESSAGE_TTL_QUEUE.getExchange(), QueueEnum.MESSAGE_TTL_QUEUE.getRouteKey(), msg, 5000);
     }
