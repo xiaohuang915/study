@@ -5,7 +5,7 @@ package com.huang.study.common.constant;
  * @Date: 2018/9/27 11:44
  * @Description:
  */
-public class ValidatorConstant {
+public final class ValidatorConstant {
     /**
      * 正则表达式:验证用户名(不包含中文和特殊字符)如果用户名使用手机号码或邮箱 则结合手机号验证和邮箱验证
      */
