@@ -19,6 +19,7 @@ import java.util.Date;
 public class RabbitmqComp {
     /**
      * 可以通过注解自动配置交换机和队列
+     * 配置消费者监听myQueue队列
      * @param msg
      */
     @RabbitListener(bindings = @QueueBinding(
@@ -29,6 +30,10 @@ public class RabbitmqComp {
         System.out.println("队列1接收消息=" + msg);
     }
 
+    /**
+     * 配置消费者监听myQueue队列
+     * @param msg
+     */
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue("myQueue"),
             exchange = @Exchange("myExchange")
@@ -37,6 +42,10 @@ public class RabbitmqComp {
         System.out.println("队列2接收消息=" + msg);
     }
 
+    /**
+     * 配置消费者监听myQueueDouble队列
+     * @param msg
+     */
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue("myQueueDouble"),
             exchange = @Exchange("myExchange")
@@ -45,6 +54,10 @@ public class RabbitmqComp {
         System.out.println("double接收消息=" + msg);
     }
 
+    /**
+     * 插件实现延时消费的消费者
+     * @param msg
+     */
     @RabbitListener(queues = {RabbitmqConfig.TIMEOUT_QUEUE})
     public void receive3(String msg) {
         System.out.println("延时接收消息=" + msg + "接收时间=" + new Date());
