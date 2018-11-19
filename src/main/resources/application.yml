@@ -11,8 +11,18 @@ spring:
       ddl-auto: update
     show-sql: true
   rabbitmq:
-       host: 172.31.101.49
+       host: 192.168.31.254
        port: 5672
        username: admin
        password: admin
        virtual-host: /
+mybatis-plus:
+    mapper-locations: classpath:mapping/*.xml
+    type-aliases-package: com.huang.study.thread.model
+    configuration:
+      map-underscore-to-camel-case: false
+      cache-enabled: true #配置的缓存的全局开关
+      lazyLoadingEnabled: true #延时加载的开关
+      multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+      callSettersOnNulls: true  #開啟將查詢結果為空的結果也放入結果集中
