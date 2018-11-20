@@ -9,4 +9,6 @@ import com.huang.study.thread.model.Order;
  */
 public interface IOrderService {
     void create(Order order);
+
+    void update(Order order);
 }

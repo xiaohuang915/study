@@ -1,0 +1,7 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huang.study.thread.mapper.EntrepotMapper">
+
+    <update id="updateEntrepot" parameterType="com.huang.study.thread.model.Entrepot">
+      update `entrepot` set `number`=#{number} -1,`version`=#{version}+1 where `guid`=#{guid} and `version` = #{version}
+    </update>
+</mapper>

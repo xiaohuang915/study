@@ -2,10 +2,13 @@ package com.huang.study.rabbitmq;
 
 import com.huang.study.common.config.RabbitmqConfig;
 import com.huang.study.security.dto.SysUser;
+import com.huang.study.thread.model.Order;
+import com.huang.study.thread.service.IOrderService;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -17,6 +20,8 @@ import java.util.Date;
  */
 @Component
 public class RabbitmqComp {
+    @Autowired
+    private IOrderService orderService;
     /**
      * 可以通过注解自动配置交换机和队列
      * 配置消费者监听myQueue队列
@@ -79,5 +84,14 @@ public class RabbitmqComp {
     @RabbitListener(queues = "message.center.create")
     public void receive4(SysUser msg) {
         System.out.println("Ttl延时接收消息=" + msg + "接收时间=" + new Date());
+    }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue("threadQueue"),
+            exchange = @Exchange("threadExchange")
+    ))
+    public void thread(Order msg) {
+        System.out.println("接收消息="+msg+"开始消费");
+        orderService.create(msg);
     }
 }

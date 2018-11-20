@@ -16,6 +16,7 @@ public class Entrepot {
     private Integer number;
     private Date createtime;
     private Integer type;
+    private Integer version;
 
     @Override
     public String toString() {
@@ -25,6 +26,14 @@ public class Entrepot {
                 ", createtime=" + createtime +
                 ", type=" + type +
                 '}';
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public Integer getType() {

@@ -16,10 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/order")
 public class ThreadController {
+//    @Autowired
+//    private AmqpTemplate amqpTemplate;
     @Autowired
     private IOrderService orderService;
     @PostMapping("/create")
     public void create(@RequestBody  Order order){
         orderService.create(order);
+//        amqpTemplate.convertAndSend("threadQueue", order);
+    }
+    @PostMapping("/update")
+    public void update(@RequestBody  Order order){
+        orderService.update(order);
     }
 }

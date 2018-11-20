@@ -1,0 +1,7 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huang.study.thread.mapper.OrderMapper">
+
+    <update id="updateOrder" parameterType="com.huang.study.thread.model.Order">
+      update `test_order` set `name`=#{name},`version`=#{version}+1,`status`=#{status} where `guid`=#{guid} and `version` = #{version}
+    </update>
+</mapper>
