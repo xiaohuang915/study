@@ -1,12 +1,15 @@
 package com.huang.study.thread.controller;
 
 import com.huang.study.thread.model.Order;
+import com.huang.study.thread.model.OrderSearchModel;
 import com.huang.study.thread.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Auther: pc.huang
@@ -28,5 +31,10 @@ public class ThreadController {
     @PostMapping("/update")
     public void update(@RequestBody  Order order){
         orderService.update(order);
+    }
+
+    @PostMapping("/select")
+    public List<Order> select(@RequestBody OrderSearchModel orderSearchModel){
+         return orderService.select(orderSearchModel);
     }
 }

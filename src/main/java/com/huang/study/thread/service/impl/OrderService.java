@@ -5,12 +5,14 @@ import com.huang.study.thread.mapper.EntrepotMapper;
 import com.huang.study.thread.mapper.OrderMapper;
 import com.huang.study.thread.model.Entrepot;
 import com.huang.study.thread.model.Order;
+import com.huang.study.thread.model.OrderSearchModel;
 import com.huang.study.thread.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Auther: pc.huang
@@ -48,5 +50,10 @@ public class OrderService implements IOrderService {
         if (i == 0) {
             throw new RuntimeException("无库存");
         }
+    }
+
+    @Override
+    public List<Order> select(OrderSearchModel orderSearchModel) {
+        return orderMapper.selectOrder(orderSearchModel);
     }
 }

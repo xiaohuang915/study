@@ -4,4 +4,23 @@
     <update id="updateOrder" parameterType="com.huang.study.thread.model.Order">
       update `test_order` set `name`=#{name},`version`=#{version}+1,`status`=#{status} where `guid`=#{guid} and `version` = #{version}
     </update>
+    <select id="selectOrder" resultType="com.huang.study.thread.model.Order">
+        select * from `test_order`
+        where status = 1
+        <if test="startTime != null and endTime == null">
+            and <![CDATA[ createtime >= #{startTime} ]]>
+        </if>
+
+        <if test="endTime != null and startTime == null" >
+            and <![CDATA[ createtime <= #{endTime} ]]>
+        </if>
+
+        <if test="endTime != null and startTime != null">
+            and <![CDATA[ createtime between #{startTime} and #{endTime} ]]>
+        </if>
+
+
+
+
+    </select>
 </mapper>

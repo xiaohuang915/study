@@ -2,7 +2,10 @@ package com.huang.study.thread.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.huang.study.thread.model.Order;
+import com.huang.study.thread.model.OrderSearchModel;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @Auther: pc.huang
@@ -12,4 +15,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface OrderMapper extends BaseMapper<Order> {
     void updateOrder(Order order);
+
+    List<Order> selectOrder(OrderSearchModel orderSearchModel);
 }
