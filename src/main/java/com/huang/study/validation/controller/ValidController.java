@@ -20,4 +20,8 @@ public class ValidController {
     public Order valid(@RequestBody @Valid Order order) {
         return order;
     }
+    @PostMapping(value = "test")
+    public Order test(@RequestBody @Valid Order order) {
+        return order;
+    }
 }
