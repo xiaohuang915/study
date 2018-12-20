@@ -17,12 +17,7 @@ import javax.validation.Valid;
 @RequestMapping("/test/")
 public class ValidController {
     @PostMapping(value = "valid")
-    public Order valid(@RequestBody @Valid Order order){
-        return order;
-    }
-
-    @PostMapping(value = "test")
-    public Order test(@RequestBody @Valid Order order){
+    public Order valid(@RequestBody @Valid Order order) {
         return order;
     }
 }
