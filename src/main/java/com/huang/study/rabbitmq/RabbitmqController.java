@@ -33,15 +33,15 @@ public class RabbitmqController {
         }
     }
 
-    /**
-     * 插件实现延时消费
-     * @param msg
-     */
-    @GetMapping("/time")
-    public void send1(String msg) {
-        System.out.println("发送消息=" + msg + "时间=" + new Date());
-        rabbitmqService.send(msg);
-    }
+//    /**
+//     * 插件实现延时消费
+//     * @param msg
+//     */
+//    @GetMapping("/time")
+//    public void send1(String msg) {
+//        System.out.println("发送消息=" + msg + "时间=" + new Date());
+//        rabbitmqService.send(msg);
+//    }
 
     /**
      * 死信队列实现延时消费

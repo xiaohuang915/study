@@ -6,7 +6,6 @@ package com.huang.study.validation.util;
  * @Description:
  */
 
-import com.huang.study.common.exception.HouseloanException;
 import org.hibernate.validator.HibernateValidator;
 
 import javax.validation.ConstraintViolation;
@@ -66,8 +65,8 @@ public class ValidationUtils {
         Iterator<ConstraintViolation<T>> iter = constraintViolations.iterator();
         while (iter.hasNext()) {
             ConstraintViolation<T> error = iter.next();
-            System.out.println(error.getPropertyPath().toString());
-            throw new HouseloanException("-1",error.getMessage(),error.getPropertyPath().toString());
+            System.out.println(error.getMessage());
+//            throw new HouseloanException("-1",error.getMessage(),error.getPropertyPath().toString());
         }
     }
 }

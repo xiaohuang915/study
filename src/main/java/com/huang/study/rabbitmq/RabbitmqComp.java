@@ -1,6 +1,5 @@
 package com.huang.study.rabbitmq;
 
-import com.huang.study.common.config.RabbitmqConfig;
 import com.huang.study.security.dto.SysUser;
 import com.huang.study.thread.model.Order;
 import com.huang.study.thread.service.IOrderService;
@@ -59,14 +58,14 @@ public class RabbitmqComp {
         System.out.println("double接收消息=" + msg);
     }
 
-    /**
-     * 插件实现延时消费的消费者
-     * @param msg
-     */
-    @RabbitListener(queues = {RabbitmqConfig.TIMEOUT_QUEUE})
-    public void receive3(String msg) {
-        System.out.println("延时接收消息=" + msg + "接收时间=" + new Date());
-    }
+//    /**
+//     * 插件实现延时消费的消费者
+//     * @param msg
+//     */
+//    @RabbitListener(queues = {RabbitmqConfig.TIMEOUT_QUEUE})
+//    public void receive3(String msg) {
+//        System.out.println("延时接收消息=" + msg + "接收时间=" + new Date());
+//    }
 
     /**
      * 如果死信队列里的消息被消费就不会转发出去

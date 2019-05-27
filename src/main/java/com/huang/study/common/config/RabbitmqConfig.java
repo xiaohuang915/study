@@ -5,9 +5,6 @@ import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Auther: pc.huang
  * @Date: 2018/11/6 15:39
@@ -15,45 +12,45 @@ import java.util.Map;
  */
 @Configuration
 public class RabbitmqConfig {
-    /**
-     * 插件实现延迟任务配置 需要安装插件和开起插件
-     */
-    //超时交换机名称
-    public static final String TIMEOUT_EXCHANGE_NAME = "timeout.exchange";
-    //超时队列名称
-    public static final String TIMEOUT_QUEUE = "timeout_queue";
-
-    /**
-     * 队列注册
-     *
-     * @return
-     */
-    @Bean
-    public Queue timeoutQueue() {
-        return new Queue(RabbitmqConfig.TIMEOUT_QUEUE, true);
-    }
-
-    /**
-     * 交换机注册
-     *
-     * @return
-     */
-    @Bean
-    public CustomExchange timeoutExchange() {
-        Map<String, Object> args = new HashMap<>();
-        args.put("x-delayed-type", "direct");
-        return new CustomExchange(RabbitmqConfig.TIMEOUT_EXCHANGE_NAME, "x-delayed-message", true, false, args);
-    }
-
-    /**
-     * 交换机和队列绑定
-     *
-     * @return
-     */
-    @Bean
-    public Binding binding() {
-        return BindingBuilder.bind(timeoutQueue()).to(timeoutExchange()).with(RabbitmqConfig.TIMEOUT_QUEUE).noargs();
-    }
+//    /**
+//     * 插件实现延迟任务配置 需要安装插件和开起插件
+//     */
+//    //超时交换机名称
+//    public static final String TIMEOUT_EXCHANGE_NAME = "timeout.exchange";
+//    //超时队列名称
+//    public static final String TIMEOUT_QUEUE = "timeout_queue";
+//
+//    /**
+//     * 队列注册
+//     *
+//     * @return
+//     */
+//    @Bean
+//    public Queue timeoutQueue() {
+//        return new Queue(RabbitmqConfig.TIMEOUT_QUEUE, true);
+//    }
+//
+//    /**
+//     * 交换机注册
+//     *
+//     * @return
+//     */
+//    @Bean
+//    public CustomExchange timeoutExchange() {
+//        Map<String, Object> args = new HashMap<>();
+//        args.put("x-delayed-type", "direct");
+//        return new CustomExchange(RabbitmqConfig.TIMEOUT_EXCHANGE_NAME, "x-delayed-message", true, false, args);
+//    }
+//
+//    /**
+//     * 交换机和队列绑定
+//     *
+//     * @return
+//     */
+//    @Bean
+//    public Binding binding() {
+//        return BindingBuilder.bind(timeoutQueue()).to(timeoutExchange()).with(RabbitmqConfig.TIMEOUT_QUEUE).noargs();
+//    }
 
     ///////////////////////////////////////////////////////
 

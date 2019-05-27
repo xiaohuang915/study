@@ -1,6 +1,5 @@
 package com.huang.study.rabbitmq;
 
-import com.huang.study.common.config.RabbitmqConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,16 +14,16 @@ public class RabbitmqService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    /**
-     * 插件实现延迟消息
-     * @param msg
-     */
-    public void send(String msg) {
-        rabbitTemplate.convertAndSend(RabbitmqConfig.TIMEOUT_EXCHANGE_NAME, RabbitmqConfig.TIMEOUT_QUEUE, msg, message -> {
-            message.getMessageProperties().setDelay(500000);
-            return message;
-        });
-    }
+//    /**
+//     * 插件实现延迟消息
+//     * @param msg
+//     */
+//    public void send(String msg) {
+//        rabbitTemplate.convertAndSend(RabbitmqConfig.TIMEOUT_EXCHANGE_NAME, RabbitmqConfig.TIMEOUT_QUEUE, msg, message -> {
+//            message.getMessageProperties().setDelay(500000);
+//            return message;
+//        });
+//    }
 
     /**
      *  发送延时消息到死信交换机
