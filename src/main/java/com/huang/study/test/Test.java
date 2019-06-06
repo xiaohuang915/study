@@ -1,11 +1,22 @@
 package com.huang.study.test;
 
+import com.alibaba.fastjson.JSON;
+import com.huang.study.test.entity.*;
+import org.apache.commons.codec.binary.Base64;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @Description:
@@ -21,36 +32,77 @@ public class Test {
 
 
     public static void main(String[] args) throws Exception {
+        PayMentRequestVo payMentRequestVo = new PayMentRequestVo();
+        HeadRequestVo headRequestVo = new HeadRequestVo();
+        headRequestVo.setAgentCode("29028001");
+        headRequestVo.setReqType("0200");
+        headRequestVo.setTrnType("PAY000");
+        headRequestVo.setTxSn("12346");
+        PayMentBodyRequestVo payMentBodyRequestVo = new PayMentBodyRequestVo();
+        payMentBodyRequestVo.setMerchantNo("456");
+        payMentBodyRequestVo.setCardNo("46468364646464");
+        payMentBodyRequestVo.setTerminalChnl("00");
+        payMentBodyRequestVo.setOrderNo("1346");
+        payMentBodyRequestVo.setAgrmtNo("13245");
+        payMentBodyRequestVo.setCurCode("001");
+        payMentBodyRequestVo.setOrderAmount("100");
+        payMentBodyRequestVo.setOrderTime("201905311640");
+        payMentBodyRequestVo.setOrderNote("");
+        payMentRequestVo.setPayMentBodyRequestVo(payMentBodyRequestVo);
+        payMentRequestVo.setHeadRequestVo(headRequestVo);
+        String s = Test.beanToXml(payMentRequestVo);
+        Map<String, String> map = new HashMap<>();
+        InputStream inputStream = new ByteArrayInputStream(s.getBytes());
+        PrivateKey privateKey = SignUtil.loadPrivateKey(FileUtil.loadInputStreamFromPath("pri.key"), "PKCS8");
+        PublicKey publicKey = SignUtil.loadPublicKey(FileUtil.loadInputStreamFromPath("pub.key"));
+        byte[] pkcs8s = SignUtil.sign(inputStream, privateKey);
+
+        String secretKey = AesCBC.createSecretKey();
+        String s1 = AesCBC.encryptAES(pkcs8s, secretKey);
+        String s3 = Base64.encodeBase64String(RSAUtil.encrypt(secretKey.getBytes(), publicKey));
+        map.put("body", s1);
+        map.put("skey", s3);
+        System.out.println(JSON.toJSONString(map));
+        String decrypt = new String(RSAUtil.decrypt(Base64.decodeBase64(s3), privateKey));
+
+        byte[] bytes = AesCBC.decryptAES(s1, decrypt);
+        String s2 = new String(bytes);
+        SignUtil.verifySign(s2.getBytes(),publicKey);
+        PayMentRequestVo payMentRequestVo1 = xmlToBean(PayMentRequestVo.class, s2);
+        System.out.println(JSON.toJSONString(payMentRequestVo1));
+
+//        PayMentRequestVo payMentRequestVo1 = convertXmlStrToObject(PayMentRequestVo.class, s);
+//        System.out.println(JSON.toJSONString(payMentRequestVo1));
 //        B b = new B();
 //        b.setName("名称");
 //        D d = BeanUtil.beanCopy(b, D.class, false);
 //        System.out.println(JSON.toJSONString(d));
-        List<A> list = new ArrayList<>();
-
-        A a = new A();
-        a.setId("111");
-        a.setAmount(1L);
-        list.add(a);
-
-        A a1 = new A();
-        a1.setId("111");
-        a1.setAmount(2L);
-        list.add(a1);
-
-        A a3 = new A();
-        a3.setId("222");
-        a3.setAmount(3L);
-        list.add(a3);
-
-        list.stream().collect(Collectors.groupingBy(A::getId)).forEach((k, v) -> {
-            if (v.size() > 1) {
-                v.forEach(b -> {
-                    b.setError("错误");
-                    System.out.println(b);
-                });
-            }
-        });
-        System.out.println(list);
+//        List<A> list = new ArrayList<>();
+//
+//        A a = new A();
+//        a.setId("111");
+//        a.setAmount(1L);
+//        list.add(a);
+//
+//        A a1 = new A();
+//        a1.setId("111");
+//        a1.setAmount(2L);
+//        list.add(a1);
+//
+//        A a3 = new A();
+//        a3.setId("222");
+//        a3.setAmount(3L);
+//        list.add(a3);
+//
+//        list.stream().collect(Collectors.groupingBy(A::getId)).forEach((k, v) -> {
+//            if (v.size() > 1) {
+//                v.forEach(b -> {
+//                    b.setError("错误");
+//                    System.out.println(b);
+//                });
+//            }
+//        });
+//        System.out.println(list);
 
 //        String s = JSON.toJSONString(list);
 //        System.out.println(s);
@@ -88,6 +140,30 @@ public class Test {
         map.forEach((k, v) -> {
             System.out.println("k=" + k + "v=" + v);
         });
+    }
+
+    public static String beanToXml(Object obj) throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(obj.getClass());
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "GBK");
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(obj, writer);
+        return writer.toString();
+    }
+
+    public static <T> T xmlToBean(Class<T> clazz, String xmlStr) {
+        Object xmlObject = null;
+        try {
+            JAXBContext context = JAXBContext.newInstance(clazz);
+            // 进行将Xml转成对象的核心接口
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            StringReader sr = new StringReader(xmlStr);
+            xmlObject = unmarshaller.unmarshal(sr);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return (T) xmlObject;
     }
 
 
