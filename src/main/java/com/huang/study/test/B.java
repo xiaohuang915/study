@@ -13,4 +13,6 @@ import lombok.Setter;
 public class B extends A {
     private String name;
 
+    private String id;
+
 }

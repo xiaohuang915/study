@@ -12,8 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public  class A {
+public class A {
 
     @JSONField(name = "ID")
     private String id = "父类id";
@@ -21,5 +20,9 @@ public  class A {
     private Long amount;
 
     private String error;
+
+    public void print() {
+        System.out.println("this =" + this);
+    }
 
 }
