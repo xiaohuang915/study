@@ -1,5 +1,6 @@
 package com.huang.study.validation.dto;
 
+import com.huang.study.validation.util.IdCard;
 import com.wuwenze.poi.annotation.Excel;
 import com.wuwenze.poi.annotation.ExcelField;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Excel("测试")
+@IdCard
 public class ExcelTest {
 
     @ExcelField(value = "编号")

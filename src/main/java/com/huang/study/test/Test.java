@@ -1,8 +1,6 @@
 package com.huang.study.test;
 
-import com.huang.study.test.entity.AccountOpenNotifyBodyRequestVo;
-import com.huang.study.test.entity.AccountOpenNotifyHeadRequestVo;
-import com.huang.study.test.entity.AccountOpenNotifyRequestVo;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -117,18 +115,21 @@ public class Test {
 ////        System.out.println("过滤后 " + JSON.toJSONString(list));
 //    }
     public static void main(String[] args) throws JAXBException {
-        AccountOpenNotifyRequestVo requestVo = new AccountOpenNotifyRequestVo();
-
-        AccountOpenNotifyHeadRequestVo headRequestVo = new AccountOpenNotifyHeadRequestVo();
-//        headRequestVo.setServiceId("123");
-        headRequestVo.setSystemId("system");
-        AccountOpenNotifyBodyRequestVo bodyRequestVo = new AccountOpenNotifyBodyRequestVo();
-//        bodyRequestVo.setAccChannelFlag("456");
-        bodyRequestVo.setCertNo("123");
-        bodyRequestVo.setAddress("地址11");
-        requestVo.setHeadRequestVo(headRequestVo);
-        requestVo.setBodyRequestVo(bodyRequestVo);
-        System.out.println(beanToXml(requestVo));
+//        AccountOpenNotifyRequestVo requestVo = new AccountOpenNotifyRequestVo();
+//
+//        AccountOpenNotifyHeadRequestVo headRequestVo = new AccountOpenNotifyHeadRequestVo();
+////        headRequestVo.setServiceId("123");
+//        headRequestVo.setSystemId("system");
+//        AccountOpenNotifyBodyRequestVo bodyRequestVo = new AccountOpenNotifyBodyRequestVo();
+////        bodyRequestVo.setAccChannelFlag("456");
+//        bodyRequestVo.setCertNo("123");
+//        bodyRequestVo.setAddress("地址11");
+//        requestVo.setHeadRequestVo(headRequestVo);
+//        requestVo.setBodyRequestVo(bodyRequestVo);
+//        System.out.println(beanToXml(requestVo));
+        String s = "ERRORCODE=5030&ERRORMSG=您好，未查到相关数据(5030)";
+        System.out.println(StringUtils.substringBetween(s, "ERRORCODE=", "&"));
+        ;
     }
 
     public static <T> void get(T t) throws IllegalAccessException {

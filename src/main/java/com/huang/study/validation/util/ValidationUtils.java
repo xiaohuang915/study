@@ -6,6 +6,7 @@ package com.huang.study.validation.util;
  * @Description:
  */
 
+import com.huang.study.validation.dto.ExcelTest;
 import org.hibernate.validator.HibernateValidator;
 
 import javax.validation.ConstraintViolation;
@@ -68,6 +69,12 @@ public class ValidationUtils {
             System.out.println(error.getMessage());
 //            throw new HouseloanException("-1",error.getMessage(),error.getPropertyPath().toString());
         }
+    }
+
+    public static void main(String[] args) {
+        ExcelTest excelTest = new ExcelTest();
+        excelTest.setId("123");
+        validate(excelTest);
     }
 }
 

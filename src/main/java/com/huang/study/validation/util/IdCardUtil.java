@@ -6,6 +6,10 @@ package com.huang.study.validation.util;
  * @Description:
  */
 
+import com.huang.study.validation.dto.ExcelTest;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.validation.ConstraintValidatorContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -74,6 +78,21 @@ public class IdCardUtil {
 
     final static int[] PARITYBIT = {'1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'};//校验码
     final static int[] POWER_LIST = {7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};//加权因子wi
+
+
+    public boolean testType(ExcelTest excelTest, ConstraintValidatorContext context) {
+        if (StringUtils.isBlank(excelTest.getId())) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate("id不能为空").addConstraintViolation();
+            return false;
+        }
+        if (StringUtils.isBlank(excelTest.getName())) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate("name不能为空").addConstraintViolation();
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 验证身份证号有效性
