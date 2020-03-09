@@ -1,9 +1,8 @@
 package com.huang.study.test;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Optional;
 
 /**
  * @Description:
@@ -19,4 +18,12 @@ public class D {
     private String id;
     private String name;
     private String phone;
+
+    public static void main(String[] args) {
+        D d = new D();
+        String s = Optional.ofNullable(d)
+                .map(D::getId)
+                .orElse("");
+
+    }
 }
