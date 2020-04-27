@@ -81,17 +81,11 @@ public class RequestVo {
     public static void main(String[] args) throws InterruptedException {
         Runnable taskTemp = new Runnable() {
 
-            // 注意，此处是非线程安全的，留坑
-            private int iCounter;
-
             @Override
             public void run() {
                 for (int i = 0; i < 100; i++) {
                     // 发起请求
-//                    System.out.println(UUidUtil.INS.nextStrId());
                     System.out.println(UuidUtil.getTxsn());
-                    iCounter++;
-//                    System.out.println(System.nanoTime() + " [" + Thread.currentThread().getName() + "] iCounter = " + iCounter);
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
