@@ -15,7 +15,7 @@ import lombok.*;
 public class A {
 
     @JSONField(name = "ID")
-    private String id = "父类id";
+    private String id = "父类id11";
 
     private Long amount;
 
