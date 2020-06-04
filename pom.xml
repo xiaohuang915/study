@@ -171,6 +171,25 @@
             <artifactId>hutool-crypto</artifactId>
             <version>5.3.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-cache -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-cache</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-json -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-json</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-system</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
