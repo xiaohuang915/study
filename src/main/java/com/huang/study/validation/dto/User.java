@@ -4,9 +4,9 @@ package com.huang.study.validation.dto;
 import com.huang.study.common.annotation.BankCard;
 import com.huang.study.common.annotation.IdCard;
 import com.huang.study.common.constant.ValidatorConstant;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**

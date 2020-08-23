@@ -1,5 +1,6 @@
 package com.huang.study.thread.service;
 
+import com.huang.study.thread.model.Entrepot;
 import com.huang.study.thread.model.Order;
 import com.huang.study.thread.model.OrderSearchModel;
 
@@ -12,6 +13,9 @@ import java.util.List;
  */
 public interface IOrderService {
     void create(Order order);
+    void insertOrder(Order order);
+    void testTra(Order order);
+    void insertEntrepot(Entrepot order);
 
     void update(Order order);
 

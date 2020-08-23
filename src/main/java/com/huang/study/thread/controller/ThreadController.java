@@ -1,5 +1,6 @@
 package com.huang.study.thread.controller;
 
+import com.huang.study.thread.model.Entrepot;
 import com.huang.study.thread.model.Order;
 import com.huang.study.thread.model.OrderSearchModel;
 import com.huang.study.thread.service.IOrderService;
@@ -19,22 +20,42 @@ import java.util.List;
 @RestController
 @RequestMapping("/order")
 public class ThreadController {
-//    @Autowired
+    //    @Autowired
 //    private AmqpTemplate amqpTemplate;
     @Autowired
     private IOrderService orderService;
+
     @PostMapping("/create")
-    public void create(@RequestBody  Order order){
+    public void create(@RequestBody Order order) {
         orderService.create(order);
 //        amqpTemplate.convertAndSend("threadQueue", order);
     }
+
     @PostMapping("/update")
-    public void update(@RequestBody  Order order){
+    public void update(@RequestBody Order order) {
         orderService.update(order);
     }
 
     @PostMapping("/select")
-    public List<Order> select(@RequestBody OrderSearchModel orderSearchModel){
-         return orderService.select(orderSearchModel);
+    public List<Order> select(@RequestBody OrderSearchModel orderSearchModel) {
+        return orderService.select(orderSearchModel);
+    }
+
+    @PostMapping("/insertOrder")
+    public void insertOrder(@RequestBody Order order) {
+        orderService.insertOrder(order);
+//        amqpTemplate.convertAndSend("threadQueue", order);
+    }
+
+    @PostMapping("/insertEntrepot")
+    public void create(@RequestBody Entrepot entrepot) {
+        orderService.insertEntrepot(entrepot);
+//        amqpTemplate.convertAndSend("threadQueue", order);
+    }
+
+    @PostMapping("/testTra")
+    public void testTra(@RequestBody Order order) {
+        orderService.testTra(order);
+//        amqpTemplate.convertAndSend("threadQueue", order);
     }
 }

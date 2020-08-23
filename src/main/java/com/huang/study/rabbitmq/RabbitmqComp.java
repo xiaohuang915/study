@@ -8,7 +8,6 @@ import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -17,7 +16,7 @@ import java.util.Date;
  * @Date: 2018/11/7 11:13
  * @Description:
  */
-@Component
+//@Component
 public class RabbitmqComp {
     @Autowired
     private IOrderService orderService;

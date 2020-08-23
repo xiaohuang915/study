@@ -8,11 +8,13 @@ import com.huang.study.thread.model.Order;
 import com.huang.study.thread.model.OrderSearchModel;
 import com.huang.study.thread.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @Auther: pc.huang
@@ -20,6 +22,7 @@ import java.util.List;
  * @Description:
  */
 @Service
+@SuppressWarnings("all")
 public class OrderService implements IOrderService {
     @Autowired
     private OrderMapper orderMapper;
@@ -56,4 +59,45 @@ public class OrderService implements IOrderService {
     public List<Order> select(OrderSearchModel orderSearchModel) {
         return orderMapper.selectOrder(orderSearchModel);
     }
+
+
+    @Override
+    public void insertOrder(Order order) {
+        order.setGuid(IdGenerator.getId());
+        order.setCreatetime(new Date());
+        orderMapper.insert(order);
+    }
+
+    @Override
+    @Transactional
+    public void testTra(Order order) {
+        order.setGuid(IdGenerator.getId());
+        order.setCreatetime(new Date());
+        orderMapper.insert(order);
+
+        Entrepot entrepot = new Entrepot();
+        entrepot.setGuid(IdGenerator.getId());
+        entrepot.setCreatetime(new Date());
+        entrepot.setVersion(order.getVersion());
+        insertEntrepot(entrepot);
+    }
+
+    @Override
+    @Transactional
+    public void insertEntrepot(Entrepot entrepot) {
+        entrepot.setGuid(IdGenerator.getId());
+        entrepot.setCreatetime(new Date());
+        entrepotMapper.insert(entrepot);
+        throw new RuntimeException("test error");
+
+    }
+
+    public CompletableFuture<Void> test(){
+
+        return CompletableFuture.completedFuture(null);
+    }
+
+
+
+
 }
