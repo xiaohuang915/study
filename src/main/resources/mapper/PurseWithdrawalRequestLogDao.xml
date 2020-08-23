@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huang.study.test.dao.PurseWithdrawalRequestLogDao">
+
+    <resultMap type="com.huang.study.test.entity.PurseWithdrawalRequestLog" id="PurseWithdrawalRequestLogMap">
+        <result property="pkCpcnPurseWithdrawalRequestLog" column="pk_cpcn_purse_withdrawal_request_log" jdbcType="VARCHAR"/>
+        <result property="tradeDate" column="trade_date" jdbcType="VARCHAR"/>
+        <result property="txSn" column="tx_sn" jdbcType="VARCHAR"/>
+        <result property="accountNo" column="account_no" jdbcType="VARCHAR"/>
+        <result property="accountName" column="account_name" jdbcType="VARCHAR"/>
+        <result property="bankCardNo" column="bank_card_no" jdbcType="VARCHAR"/>
+        <result property="bankAccountName" column="bank_account_name" jdbcType="VARCHAR"/>
+        <result property="amount" column="amount" jdbcType="LONG INTEGER"/>
+        <result property="poundage" column="poundage" jdbcType="LONG INTEGER"/>
+        <result property="trsFlag" column="trs_flag" jdbcType="VARCHAR"/>
+        <result property="balFlag" column="bal_flag" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="msg" column="msg" jdbcType="VARCHAR"/>
+        <result property="cpcnSn" column="cpcn_sn" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PurseWithdrawalRequestLogMap">
+        select
+          pk_cpcn_purse_withdrawal_request_log, trade_date, tx_sn, account_no, account_name, bank_card_no, bank_account_name, amount, poundage, trs_flag, bal_flag, remark, code, msg, cpcn_sn, create_time
+        from security.cpcn_purse_withdrawal_request_log
+        where pk_cpcn_purse_withdrawal_request_log = #{pkCpcnPurseWithdrawalRequestLog}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PurseWithdrawalRequestLogMap">
+        select
+          pk_cpcn_purse_withdrawal_request_log, trade_date, tx_sn, account_no, account_name, bank_card_no, bank_account_name, amount, poundage, trs_flag, bal_flag, remark, code, msg, cpcn_sn, create_time
+        from security.cpcn_purse_withdrawal_request_log
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="PurseWithdrawalRequestLogMap">
+        select
+          pk_cpcn_purse_withdrawal_request_log, trade_date, tx_sn, account_no, account_name, bank_card_no, bank_account_name, amount, poundage, trs_flag, bal_flag, remark, code, msg, cpcn_sn, create_time
+        from security.cpcn_purse_withdrawal_request_log
+        <where>
+            <if test="pkCpcnPurseWithdrawalRequestLog != null and pkCpcnPurseWithdrawalRequestLog != ''">
+                and pk_cpcn_purse_withdrawal_request_log = #{pkCpcnPurseWithdrawalRequestLog}
+            </if>
+            <if test="tradeDate != null and tradeDate != ''">
+                and trade_date = #{tradeDate}
+            </if>
+            <if test="txSn != null and txSn != ''">
+                and tx_sn = #{txSn}
+            </if>
+            <if test="accountNo != null and accountNo != ''">
+                and account_no = #{accountNo}
+            </if>
+            <if test="accountName != null and accountName != ''">
+                and account_name = #{accountName}
+            </if>
+            <if test="bankCardNo != null and bankCardNo != ''">
+                and bank_card_no = #{bankCardNo}
+            </if>
+            <if test="bankAccountName != null and bankAccountName != ''">
+                and bank_account_name = #{bankAccountName}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="poundage != null">
+                and poundage = #{poundage}
+            </if>
+            <if test="trsFlag != null and trsFlag != ''">
+                and trs_flag = #{trsFlag}
+            </if>
+            <if test="balFlag != null and balFlag != ''">
+                and bal_flag = #{balFlag}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="msg != null and msg != ''">
+                and msg = #{msg}
+            </if>
+            <if test="cpcnSn != null and cpcnSn != ''">
+                and cpcn_sn = #{cpcnSn}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="pkCpcnPurseWithdrawalRequestLog" useGeneratedKeys="true">
+        insert into security.cpcn_purse_withdrawal_request_log(trade_date, tx_sn, account_no, account_name, bank_card_no, bank_account_name, amount, poundage, trs_flag, bal_flag, remark, code, msg, cpcn_sn, create_time)
+        values (#{tradeDate}, #{txSn}, #{accountNo}, #{accountName}, #{bankCardNo}, #{bankAccountName}, #{amount}, #{poundage}, #{trsFlag}, #{balFlag}, #{remark}, #{code}, #{msg}, #{cpcnSn}, #{createTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update security.cpcn_purse_withdrawal_request_log
+        <set>
+            <if test="tradeDate != null and tradeDate != ''">
+                trade_date = #{tradeDate},
+            </if>
+            <if test="txSn != null and txSn != ''">
+                tx_sn = #{txSn},
+            </if>
+            <if test="accountNo != null and accountNo != ''">
+                account_no = #{accountNo},
+            </if>
+            <if test="accountName != null and accountName != ''">
+                account_name = #{accountName},
+            </if>
+            <if test="bankCardNo != null and bankCardNo != ''">
+                bank_card_no = #{bankCardNo},
+            </if>
+            <if test="bankAccountName != null and bankAccountName != ''">
+                bank_account_name = #{bankAccountName},
+            </if>
+            <if test="amount != null">
+                amount = #{amount},
+            </if>
+            <if test="poundage != null">
+                poundage = #{poundage},
+            </if>
+            <if test="trsFlag != null and trsFlag != ''">
+                trs_flag = #{trsFlag},
+            </if>
+            <if test="balFlag != null and balFlag != ''">
+                bal_flag = #{balFlag},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="msg != null and msg != ''">
+                msg = #{msg},
+            </if>
+            <if test="cpcnSn != null and cpcnSn != ''">
+                cpcn_sn = #{cpcnSn},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where pk_cpcn_purse_withdrawal_request_log = #{pkCpcnPurseWithdrawalRequestLog}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from security.cpcn_purse_withdrawal_request_log where pk_cpcn_purse_withdrawal_request_log = #{pkCpcnPurseWithdrawalRequestLog}
+    </delete>
+
+</mapper>
