@@ -15,7 +15,17 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   redis:
-    url:
+    host: 192.168.51.241
+    database: 2
+    password: 123456
+    port: 6379
+    timeout: 310
+    jedis:
+      pool:
+        max-wait: -1
+        max-active: 8
+        max-idle: 20
+        min-idle: 0
 mybatis-plus:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.huang.study.thread.model
