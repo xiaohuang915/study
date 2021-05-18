@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/security?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: root!123
     filters: log4j,wall,mergeStat
     driver-class-name: com.mysql.jdbc.Driver
   jpa:

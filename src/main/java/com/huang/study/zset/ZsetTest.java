@@ -13,21 +13,21 @@ import java.util.Set;
  * @Date : 2021/5/18 10:16
  */
 @Service
-public class Test11 {
+public class ZsetTest {
 
     @Autowired
-    private RedisTemplate<String,UserInfo> redisTemplate;
+    private RedisTemplate<String, UserInfo> redisTemplate;
 
-    private String key = "testscore2";
+    private String key = "testscore3";
 
-    public void score(){
+    public void score() {
         redisTemplate.opsForZSet().incrementScore(key, new UserInfo("123", "橙子\\uD83C\\uDF4A"), 11);
         redisTemplate.opsForZSet().incrementScore(key, new UserInfo("456", "一眼看不出"), 2);
         redisTemplate.opsForZSet().incrementScore(key, new UserInfo("789", "啾"), 10);
 
         Set<ZSetOperations.TypedTuple<UserInfo>> typedTuples = redisTemplate.opsForZSet().reverseRangeWithScores(key, 0, 10);
         for (ZSetOperations.TypedTuple<UserInfo> typedTuple : typedTuples) {
-            System.out.println(typedTuple.getScore()+"---"+typedTuple.getValue().toString());
+            System.out.println(typedTuple.getScore() + "---" + typedTuple.getValue().toString());
         }
 
     }

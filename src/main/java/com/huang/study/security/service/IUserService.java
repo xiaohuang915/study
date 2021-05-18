@@ -9,7 +9,7 @@ import com.huang.study.security.dto.SysUser;
  */
 public interface IUserService {
     void add(SysUser sysUser);
-    void del(long id);
+    void delete(long id);
     void update(SysUser sysUser);
     SysUser findUserByUserName(String userName);
 }
