@@ -54,6 +54,7 @@ public class BatchInsertMuchTest {
             ps.executeBatch();
             conn.commit();
             ps.close();
+            conn.close();
             Long t2 = System.currentTimeMillis();
             System.out.println(count + "条    每次" + batchSize + "条   " + (t2 - t1) / 1000 + "秒");
         } catch (Exception e) {
